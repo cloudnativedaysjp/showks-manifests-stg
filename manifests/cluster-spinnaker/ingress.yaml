@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - spin-ui.stg.showks.containerdays.jp
+      - spin-ui.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: spin-ui.stg.showks.containerdays.jp
+  - host: spin-ui.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /
@@ -35,10 +35,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - spin-api.stg.showks.containerdays.jp
+      - spin-api.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: spin-api.stg.showks.containerdays.jp
+  - host: spin-api.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /
