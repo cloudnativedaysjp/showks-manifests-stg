@@ -3,10 +3,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: showks-canvas-kojiha-temp
+  name: showks-canvas-skomma-temp
   namespace: showks
   labels:
-    app: showks-canvas-kojiha-temp
+    app: showks-canvas-skomma-temp
     class: showks-canvas
 spec:
   type: ClusterIP
@@ -16,32 +16,32 @@ spec:
       protocol: TCP
       name: app-port
   selector:
-    app: showks-canvas-kojiha-temp
+    app: showks-canvas-skomma-temp
 
 ---
 # Source: showks-canvas/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: showks-canvas-kojiha-temp
+  name: showks-canvas-skomma-temp
   namespace: showks
   labels:
-    app: showks-canvas-kojiha-temp
+    app: showks-canvas-skomma-temp
     class: showks-canvas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: showks-canvas-kojiha-temp
+      app: showks-canvas-skomma-temp
   template:
     metadata:
       labels:
-        app: showks-canvas-kojiha-temp
+        app: showks-canvas-skomma-temp
         class: showks-canvas
     spec:
       containers:
-        - name: showks-canvas-kojiha-temp
-          image: gcr.io/ipc-containerdays/showks-canvas-kojiha:stg-048350d994229951a38f97da501bb424556bcb51
+        - name: showks-canvas-skomma-temp
+          image: gcr.io/ipc-containerdays/showks-canvas-skomma:stg-2c2ce6f01174d30be4d5e0b9b26b99f1b3e380d7
           ports:
             - name: app-port
               containerPort: 8080
@@ -52,25 +52,25 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: showks-canvas-kojiha-temp
+  name: showks-canvas-skomma-temp
   namespace: showks
   labels:
     class: showks-canvas
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.org/ssl-services: "showks-canvas-kojiha-temp"
+    nginx.org/ssl-services: "showks-canvas-skomma-temp"
     ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   tls:
     - hosts:
-      - showks-canvas-kojiha.stg.showks.containerdays.jp
+      - showks-canvas-skomma.stg.showks.containerdays.jp
       secretName: tls-certificate
   rules:
-  - host: showks-canvas-kojiha.stg.showks.containerdays.jp
+  - host: showks-canvas-skomma.stg.showks.containerdays.jp
     http:
       paths:
       - path: /
         backend:
-          serviceName: showks-canvas-kojiha-temp
+          serviceName: showks-canvas-skomma-temp
           servicePort: 8080
 
