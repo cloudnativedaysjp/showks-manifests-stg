@@ -261,5 +261,13 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 10
+          volumeMounts:
+            - mountPath: /etc/nginx-ssl/dhparam
+              name: tls-dhparam-vol
+      volumes:
+        - name: tls-dhparam-vol
+          secret:
+            secretName: tls-dhparam
+
 
 ---
