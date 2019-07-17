@@ -10,8 +10,6 @@ metadata:
 spec:
   tls:
     - hosts:
-      - '*.stg.showks.containerdays.jp'
-      - '*.showks.containerdays.jp'
       - spin-ui.stg.showks.cloudnativedays.jp
       secretName: default/tls-certificate
   rules:
@@ -37,8 +35,6 @@ metadata:
 spec:
   tls:
     - hosts:
-      - '*.stg.showks.cloudnativedays.jp'
-      - '*.showks.containerdays.jp'
       - spin-api.stg.showks.cloudnativedays.jp
       secretName: default/tls-certificate
   rules:
