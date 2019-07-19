@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-926368ca1db2ae1302c0aa3c1571866847602dbc
+        image: cloudnativedaysjp/showks-form:stg-ba92788c0abef9b5c010bf480c3821203f093f67
         env:
           - name: RAILS_ENV
             value: "production"
@@ -51,11 +51,6 @@ spec:
                 key: masterkey
           - name: RAILS_LOG_TO_STDOUT
             value: "true"
-        lifecycle:
-          postStart:
-            exec:
-              command:
-                - /usr/src/showks-form/post-start.sh
         ports:
         - containerPort: 3000
 
