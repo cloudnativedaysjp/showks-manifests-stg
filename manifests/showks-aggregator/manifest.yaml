@@ -50,7 +50,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: showks-aggregator-temp
-  namespace: showks
+  namespace: showks-system
   labels:
     app: showks-aggregator-temp
 spec:
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
         - name: showks-aggregator-temp
-          image: gcr.io/ipc-cloudnativedays/showks-aggregator:stg-2e75b6b4e096af9503ccacb0e75f45b22f5454a5
+          image: gcr.io/ipc-cloudnativedays/showks-aggregator:stg-023c21e61b14af11ba91242e2b8be45ccfb252ae
           env:
             - name: DOMAIN
               valueFrom:
