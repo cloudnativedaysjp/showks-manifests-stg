@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: showks-portal-frontend-temp
-  namespace: showks
+  namespace: showks-system
   labels:
     app: showks-portal-frontend-temp
 spec:
@@ -23,7 +23,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: showks-portal-frontend-temp
-  namespace: showks
+  namespace: showks-system
   labels:
     app: showks-portal-frontend-temp
 spec:
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: showks-portal-frontend-temp
-          image: gcr.io/ipc-cloudnativedays/showks-portal-frontend:stg-664d91d3170f1732e3bd0033c4999c624142fbb2
+          image: gcr.io/ipc-cloudnativedays/showks-portal-frontend:stg-7079ff2d9ba2d83ae4d1793d9394041ef9665740
           env:
             - name: DOMAIN
               valueFrom:
