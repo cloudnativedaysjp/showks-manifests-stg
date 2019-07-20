@@ -67,21 +67,47 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-6ef2712eb58e6fa184d7b5eba44c7a8c3c1cfdb6
+        image: cloudnativedaysjp/showks-form:stg-4c8a5448a0bf0cd655908b1c869b9ee113b6af1c
         env:
           - name: RAILS_ENV
             value: "production"
           - name: RAILS_SERVE_STATIC_FILES
             value: "true"
-          - name: RAILS_MASTER_KEY
-            valueFrom:
-              secretKeyRef:
-                name: masterkey
-                key: masterkey
           - name: RAILS_LOG_TO_STDOUT
             value: "true"
           - name: IN_CLUSTER
             value: "true"
+          - name: WEBHOOK_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: webhook_token
+          - name: REGISTRY_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: registry_username
+          - name: REGISTRY_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: registry_password
+          - name: REGISTRY_URL
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: registry_url
+          - name: GITHUB_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: github_access_token
+          - name: GITHUB_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: showks-form
+                key: github_private_key
+
         ports:
         - containerPort: 3000
 
