@@ -5,7 +5,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: showks-aggregator-access
-  namespace: showks-system
+  namespace: showks
 rules:
 - apiGroups: ["","apps","extensions"]
   resources: ["services","deployments","ingresses"]
@@ -16,7 +16,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
   name: showks-aggregator-access-binding
-  namespace: showks-system
+  namespace: showks
 subjects:
   - kind: ServiceAccount
     name: default
@@ -31,7 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: showks-aggregator-temp
-  namespace: showks-system
+  namespace: showks
   labels:
     app: showks-aggregator-temp
 spec:
@@ -50,7 +50,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: showks-aggregator-temp
-  namespace: showks-system
+  namespace: showks
   labels:
     app: showks-aggregator-temp
 spec:
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
         - name: showks-aggregator-temp
-          image: gcr.io/ipc-cloudnativedays/showks-aggregator:stg-c8dc6d897698dff55f06843d8f8c35010583fa5c
+          image: gcr.io/ipc-cloudnativedays/showks-aggregator:stg-02e127085a360868ba9ce561c65e72267f30db77
           env:
             - name: DOMAIN
               valueFrom:
