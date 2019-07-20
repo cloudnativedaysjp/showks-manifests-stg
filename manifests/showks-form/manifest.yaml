@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-4cc54ff9dfa9cfcfd3d68e456817998311ab9109
+        image: cloudnativedaysjp/showks-form:stg-e3eb1e6ba8dbbbe48dbf78a0970beed5eb0b282a
         env:
           - name: RAILS_ENV
             value: "production"
@@ -50,6 +50,8 @@ spec:
                 name: masterkey
                 key: masterkey
           - name: RAILS_LOG_TO_STDOUT
+            value: "true"
+          - name: IN_CLUSTER
             value: "true"
         ports:
         - containerPort: 3000
