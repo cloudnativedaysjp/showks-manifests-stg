@@ -10,7 +10,30 @@ rules:
 - apiGroups: ["","apps","extensions"]
   resources: ["services","deployments","ingresses", "pods"]
   verbs: ["get", "watch", "list"]
-- apiGroups: ["showks.cloudnativedays.jp/v1beta1", "argoproj.io/v1alpha1"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: showks-form-access-binding
+  namespace: showks-system
+subjects:
+- kind: ServiceAccount
+  name: default
+roleRef:
+  kind: Role
+  name: showks-form-access
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: showks-form-access
+  namespace: showks
+rules:
+- apiGroups: ["","apps","extensions"]
+  resources: ["services","deployments","ingresses", "pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["showks.cloudnativedays.jp/v1beta1"]
   resources: ["*"]
   verbs: ["*"]
 
@@ -27,6 +50,34 @@ roleRef:
   kind: Role
   name: showks-form-access
   apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: showks-form-access
+  namespace: argocd
+rules:
+- apiGroups: ["","apps","extensions"]
+  resources: ["services","deployments","ingresses", "pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["argoproj.io/v1alpha1"]
+  resources: ["*"]
+  verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: showks-form-access-binding
+  namespace: showks-system
+subjects:
+- kind: ServiceAccount
+  name: default
+roleRef:
+  kind: Role
+  name: showks-form-access
+  apiGroup: rbac.authorization.k8s.io
+
 ---
 # Source: showks-form/templates/service.yaml
 apiVersion: v1
@@ -67,7 +118,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-a18a62b22b068f5e3d77edf6a4d89c72b8d860e8
+        image: cloudnativedaysjp/showks-form:stg-40604bc116def0f0c824a3d7453995150fae33da
         env:
           - name: RAILS_ENV
             value: "production"
