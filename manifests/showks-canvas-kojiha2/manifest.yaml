@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-kojiha2-temp
-          image: cloudnativedaysjp/showks-canvas-kojiha2:stg-0f32dc5ae8369fadffc92fe8613681940efb0570
+          image: cloudnativedaysjp/showks-canvas-kojiha2:stg-0d38285360f76cff9551fdce30800454ea743659
           env:
             - name: USER_ID
               value: kojiha2
