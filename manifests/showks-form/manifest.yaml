@@ -1,7 +1,7 @@
 ---
 # Source: showks-form/templates/role.yaml
 ---
-kind: Role
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: showks-form-access
@@ -18,7 +18,7 @@ rules:
   verbs: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: showks-form-access-binding
   namespace: showks-system
@@ -26,63 +26,7 @@ subjects:
 - kind: ServiceAccount
   name: default
 roleRef:
-  kind: Role
-  name: showks-form-access
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: showks-form-access
-  namespace: showks
-rules:
-- apiGroups: ["","apps","extensions"]
-  resources: ["services","deployments","ingresses", "pods"]
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["showks.cloudnativedays.jp/v1beta1"]
-  resources: ["*"]
-  verbs: ["*"]
-- apiGroups: ["argoproj.io/v1alpha1"]
-  resources: ["*"]
-  verbs: ["*"]
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
-metadata:
-  name: showks-form-access-binding
-  namespace: showks
-subjects:
-- kind: ServiceAccount
-  name: default
-roleRef:
-  kind: Role
-  name: showks-form-access
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: showks-form-access
-  namespace: argocd
-rules:
-- apiGroups: ["","apps","extensions"]
-  resources: ["services","deployments","ingresses", "pods"]
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["argoproj.io/v1alpha1"]
-  resources: ["*"]
-  verbs: ["*"]
-
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
-metadata:
-  name: showks-form-access-binding
-  namespace: showks-system
-subjects:
-- kind: ServiceAccount
-  name: default
-roleRef:
-  kind: Role
+  kind: ClusterRole
   name: showks-form-access
   apiGroup: rbac.authorization.k8s.io
 
@@ -126,7 +70,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-5fc49fd7a15b9ffe4f3df59d7c978bbece8da1e1
+        image: cloudnativedaysjp/showks-form:stg-c6cce7af18540ba46f95e6ae4f477476086bc583
         env:
           - name: RAILS_ENV
             value: "production"
