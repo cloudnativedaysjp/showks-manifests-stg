@@ -1,0 +1,99 @@
+---
+# Source: showks-canvas/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: showks-canvas-kyohmizu-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-kyohmizu-temp
+    class: showks-canvas
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: app-port
+  selector:
+    app: showks-canvas-kyohmizu-temp
+
+---
+# Source: showks-canvas/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: showks-canvas-kyohmizu-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-kyohmizu-temp
+    class: showks-canvas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: showks-canvas-kyohmizu-temp
+  template:
+    metadata:
+      labels:
+        app: showks-canvas-kyohmizu-temp
+        class: showks-canvas
+    spec:
+      containers:
+        - name: showks-canvas-kyohmizu-temp
+          image: cloudnativedaysjp/showks-canvas-kyohmizu:stg-a09edecf70a2f43b357a23bac642065dfafa7824
+          env:
+            - name: USER_ID
+              value: kyohmizu
+            - name: IMAGE_BUCKET_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: endpoint
+            - name: IMAGE_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: name
+            - name: IMAGE_BUCKET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: access_key
+            - name: IMAGE_BUCKET_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: secret_key
+          ports:
+            - name: app-port
+              containerPort: 8080
+              protocol: TCP
+
+---
+# Source: showks-canvas/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: showks-canvas-kyohmizu-temp
+  namespace: showks
+  labels:
+    class: showks-canvas
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.org/ssl-services: "showks-canvas-kyohmizu-temp"
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+      - showks-canvas-kyohmizu.stg.showks.cloudnativedays.jp
+      secretName: tls-certificate
+  rules:
+  - host: showks-canvas-kyohmizu.stg.showks.cloudnativedays.jp
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: showks-canvas-kyohmizu-temp
+          servicePort: 8080
+
