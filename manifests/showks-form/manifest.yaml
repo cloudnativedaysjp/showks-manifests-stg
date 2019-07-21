@@ -25,6 +25,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: default
+  namespace: showks-system
 roleRef:
   kind: ClusterRole
   name: showks-form-access
