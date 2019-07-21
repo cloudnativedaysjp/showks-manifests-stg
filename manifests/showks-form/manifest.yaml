@@ -42,7 +42,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
   name: showks-form-access-binding
-  namespace: showks-system
+  namespace: showks
 subjects:
 - kind: ServiceAccount
   name: default
@@ -118,7 +118,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-275cfd96da443c0313c6f9fc361cccc2363edf23
+        image: cloudnativedaysjp/showks-form:stg-04dbdcffb91130cfea6deda8191f79ef8e33227b
         env:
           - name: RAILS_ENV
             value: "production"
