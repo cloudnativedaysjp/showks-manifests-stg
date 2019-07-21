@@ -118,7 +118,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-0514a8e61167795e12c35dfe174c3239574fa11e
+        image: cloudnativedaysjp/showks-form:stg-a303ec6f108001842cab7c7d3533dabe14c46eab
         env:
           - name: RAILS_ENV
             value: "production"
