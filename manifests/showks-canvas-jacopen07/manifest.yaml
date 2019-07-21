@@ -1,0 +1,76 @@
+---
+# Source: showks-canvas/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: showks-canvas-jacopen07-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-jacopen07-temp
+    class: showks-canvas
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: app-port
+  selector:
+    app: showks-canvas-jacopen07-temp
+
+---
+# Source: showks-canvas/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: showks-canvas-jacopen07-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-jacopen07-temp
+    class: showks-canvas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: showks-canvas-jacopen07-temp
+  template:
+    metadata:
+      labels:
+        app: showks-canvas-jacopen07-temp
+        class: showks-canvas
+    spec:
+      containers:
+        - name: showks-canvas-jacopen07-temp
+          image: cloudnativedaysjp/showks-canvas-jacopen07:stg-9b265cd91f683ac239065a471278d5936e03d150
+          ports:
+            - name: app-port
+              containerPort: 8080
+              protocol: TCP
+
+---
+# Source: showks-canvas/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: showks-canvas-jacopen07-temp
+  namespace: showks
+  labels:
+    class: showks-canvas
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.org/ssl-services: "showks-canvas-jacopen07-temp"
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+      - showks-canvas-jacopen07.stg.showks.cloudnativedays.jp
+      secretName: tls-certificate
+  rules:
+  - host: showks-canvas-jacopen07.stg.showks.cloudnativedays.jp
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: showks-canvas-jacopen07-temp
+          servicePort: 8080
+

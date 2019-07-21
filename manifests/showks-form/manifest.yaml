@@ -118,7 +118,7 @@ spec:
     spec:
       containers:
       - name: showks-form-temp
-        image: cloudnativedaysjp/showks-form:stg-f7dcd40d229d8cf359d6ef26b99fc599ecd858c5
+        image: cloudnativedaysjp/showks-form:stg-bebc35aad45e87b34baf518c3fb335cbaea0f9c1
         env:
           - name: RAILS_ENV
             value: "production"
@@ -163,6 +163,16 @@ spec:
               secretKeyRef:
                 name: showks-secret
                 key: github_org
+          - name: STORAGE_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: showks-secret
+                key: storage_access_key
+          - name: STORAGE_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: showks-secret
+                key: storage_secret_key
 
         ports:
         - containerPort: 3000
