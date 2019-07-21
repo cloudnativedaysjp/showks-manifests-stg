@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-jacopen-temp
-          image: cloudnativedaysjp/showks-canvas-jacopen:stg-0fbac0b32b6c42a0425eaca15975a31d0a1d0a98
+          image: cloudnativedaysjp/showks-canvas-jacopen:stg-9859150240e7516b33d3deb5d3fd31ccb64e5bde
           env:
             - name: IMAGE_BUCKET_ENDPOINT
               valueFrom:
