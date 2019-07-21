@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-kyohmizu-temp
-          image: cloudnativedaysjp/showks-canvas-kyohmizu:stg-a09edecf70a2f43b357a23bac642065dfafa7824
+          image: cloudnativedaysjp/showks-canvas-kyohmizu:stg-976f4667c245513f6cbdac4c12106754766449dd
           env:
             - name: USER_ID
               value: kyohmizu
