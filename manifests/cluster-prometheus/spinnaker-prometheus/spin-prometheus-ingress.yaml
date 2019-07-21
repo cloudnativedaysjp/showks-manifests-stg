@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - spin-prometheus.stg.showks.containerdays.jp
+      - spin-prometheus.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: spin-prometheus.stg.showks.containerdays.jp
+  - host: spin-prometheus.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /

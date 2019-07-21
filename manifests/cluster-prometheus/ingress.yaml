@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - prometheus-k8s.stg.showks.containerdays.jp
+      - prometheus-k8s.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: prometheus-k8s.stg.showks.containerdays.jp
+  - host: prometheus-k8s.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /
@@ -35,10 +35,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - grafana.stg.showks.containerdays.jp
+      - grafana.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: grafana.stg.showks.containerdays.jp
+  - host: grafana.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /

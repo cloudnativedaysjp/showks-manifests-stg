@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - aggregator.stg.showks.containerdays.jp
+      - aggregator.stg.showks.cloudnativedays.jp
       secretName: tls-certificate
   rules:
-  - host: aggregator.stg.showks.containerdays.jp
+  - host: aggregator.stg.showks.cloudnativedays.jp
     http:
       paths:
       - path: /
