@@ -41,8 +41,10 @@ spec:
     spec:
       containers:
         - name: showks-canvas-makocchi-temp
-          image: cloudnativedaysjp/showks-canvas-makocchi:stg-8dda5c21f4e84c724b9995afbacef3b1fca90949
+          image: cloudnativedaysjp/showks-canvas-makocchi:stg-68281072288edad8a0e0f7b4b12654485d4116c0
           env:
+            - name: USER_ID
+              value: makocchi
             - name: IMAGE_BUCKET_ENDPOINT
               valueFrom:
                 secretKeyRef:
