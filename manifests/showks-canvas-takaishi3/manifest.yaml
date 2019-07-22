@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-takaishi3-temp
-          image: cloudnativedaysjp/showks-canvas-takaishi3:stg-e1358fd952278bce01f632ae823e732bde07b678
+          image: cloudnativedaysjp/showks-canvas-takaishi3:stg-9c1a8dc3f9c0993ca76d8ed88e2a5ec7b771892a
           env:
             - name: USER_ID
               value: takaishi3
