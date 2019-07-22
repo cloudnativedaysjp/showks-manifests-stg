@@ -1,0 +1,99 @@
+---
+# Source: showks-canvas/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: showks-canvas-makocchi2-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-makocchi2-temp
+    class: showks-canvas
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: app-port
+  selector:
+    app: showks-canvas-makocchi2-temp
+
+---
+# Source: showks-canvas/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: showks-canvas-makocchi2-temp
+  namespace: showks
+  labels:
+    app: showks-canvas-makocchi2-temp
+    class: showks-canvas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: showks-canvas-makocchi2-temp
+  template:
+    metadata:
+      labels:
+        app: showks-canvas-makocchi2-temp
+        class: showks-canvas
+    spec:
+      containers:
+        - name: showks-canvas-makocchi2-temp
+          image: cloudnativedaysjp/showks-canvas-makocchi2:stg-ebc4b1d31322e3d0a36d3e03f0a59fc9129711be
+          env:
+            - name: USER_ID
+              value: makocchi2
+            - name: IMAGE_BUCKET_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: endpoint
+            - name: IMAGE_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: name
+            - name: IMAGE_BUCKET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: access_key
+            - name: IMAGE_BUCKET_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: image-bucket-secret
+                  key: secret_key
+          ports:
+            - name: app-port
+              containerPort: 8080
+              protocol: TCP
+
+---
+# Source: showks-canvas/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: showks-canvas-makocchi2-temp
+  namespace: showks
+  labels:
+    class: showks-canvas
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.org/ssl-services: "showks-canvas-makocchi2-temp"
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+      - showks-canvas-makocchi2.stg.showks.cloudnativedays.jp
+      secretName: tls-certificate
+  rules:
+  - host: showks-canvas-makocchi2.stg.showks.cloudnativedays.jp
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: showks-canvas-makocchi2-temp
+          servicePort: 8080
+
