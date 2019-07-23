@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-mtst2-temp
-          image: cloudnativedaysjp/showks-canvas-mtst2:stg-9601d7be2fbfbd5d78953b95fe4ef103a6b885f0
+          image: cloudnativedaysjp/showks-canvas-mtst2:stg-6e5f1cd39a528e284ae36da7d27d4c48ecd58037
           env:
             - name: USER_ID
               value: mtst2
