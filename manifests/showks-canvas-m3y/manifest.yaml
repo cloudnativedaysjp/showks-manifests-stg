@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: showks-canvas-m3y-temp
-          image: cloudnativedaysjp/showks-canvas-m3y:stg-12adee772105b2d3a0e7fcf7aafba71a38020a0a
+          image: cloudnativedaysjp/showks-canvas-m3y:stg-a87205acccaf6346988f58c9531d4aeb9e77c3a6
           env:
             - name: USER_ID
               value: m3y
